@@ -1,0 +1,1 @@
+README fyrir verklega eðlifræði
