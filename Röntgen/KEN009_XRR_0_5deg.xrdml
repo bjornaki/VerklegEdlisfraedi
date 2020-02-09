@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xrdMeasurements xmlns="http://www.xrdml.com/XRDMeasurement/1.5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.xrdml.com/XRDMeasurement/1.5 http://www.xrdml.com/XRDMeasurement/1.5/XRDMeasurement.xsd" status="Completed">
+	<comment>
+		<entry>Configuration=MRD 2016, Owner=hydrogen, Creation date=09-Dec-16 19:44:12</entry>
+		<entry>Goniometer=PW3050/65 (Theta/2Theta); Minimum step size 2Theta:0.0001; Minimum step size Omega:0.0001</entry>
+		<entry>Sample stage=MRD Cradle; Minimum step size Phi:0.01; Minimum step size Chi:0.01; Minimum step size X:0.01; Minimum step size Y:0.01; Minimum step size Z:0.001</entry>
+		<entry>Diffractometer system=XPERT-PRO</entry>
+		<entry>Measurement program=Manual, Owner=hydrogen, Creation date=30-Jan-20 12:54:00</entry>
+		<entry>Fine Calibration Offset for 2Theta = 0.0048 deg</entry>
+		<entry>Fine Calibration Offset for Omega = 0.0080 deg</entry>
+	</comment>
+	<sample type="To be analyzed">
+		<id></id>
+		<name></name>
+		<preparedBy></preparedBy>
+	</sample>
+	<xrdMeasurement measurementType="Scan" status="Completed" sampleMode="Reflection">
+		<comment>
+			<entry>PHD Lower Level = 5.63 (keV), PHD Upper Level = 12.88 (keV)</entry>
+		</comment>
+		<usedWavelength intended="K-Alpha 1">
+			<kAlpha1 unit="Angstrom">1.5405940</kAlpha1>
+			<kAlpha2 unit="Angstrom">1.5444080</kAlpha2>
+			<kBeta unit="Angstrom">1.3922500</kBeta>
+			<ratioKAlpha2KAlpha1>0.5200</ratioKAlpha2KAlpha1>
+		</usedWavelength>
+		<incidentBeamPath>
+			<radius unit="mm">320.00</radius>
+			<xRayTube id="1010048" name="Empyrean Cu LFF HR (9430 033 7310x) DK164548">
+				<tension unit="kV">45</tension>
+				<current unit="mA">40</current>
+				<anodeMaterial>Cu</anodeMaterial>
+				<focus type="Line">
+					<length unit="mm">12.0</length>
+					<width unit="mm">0.4</width>
+					<takeOffAngle unit="deg">3.4</takeOffAngle>
+				</focus>
+			</xRayTube>
+			<xRayMirror id="27010001" name="Inc. Beam Cu W/Si (parabolic MRD)" hybrid="false">
+				<crystal type="Graded" shape="Parabolic">W/Si</crystal>
+				<acceptanceAngle unit="deg">0.800</acceptanceAngle>
+				<length unit="mm">60.0</length>
+			</xRayMirror>
+			<sollerSlit id="21010001" name="Soller slits 0.02 rad.">
+				<opening unit="rad">0.0200</opening>
+			</sollerSlit>
+			<divergenceSlit id="22010011" name="Fixed slit 1/32°" xsi:type="fixedDivergenceSlitType">
+				<distanceToSample unit="mm">220.00</distanceToSample>
+				<height unit="mm">0.05</height>
+			</divergenceSlit>
+			<beamAttenuator id="26010002" name="Beam attenuator Cu 0.1 mm" xsi:type="intensitySwitchedBeamAttenuatorType">
+				<factor>119.20</factor>
+				<material>Cu</material>
+				<activateLevel unit="counts per second">700000</activateLevel>
+				<deactivateLevel unit="counts per second">400000</deactivateLevel>
+			</beamAttenuator>
+		</incidentBeamPath>
+		<sampleOffset>
+			<position axis="2Theta" unit="deg">0.0000</position>
+			<position axis="Omega" unit="deg">-0.1476</position>
+		</sampleOffset>
+		<diffractedBeamPath>
+			<radius unit="mm">320.00</radius>
+			<parallelPlateCollimator id="25010001" name="Parallel plate collimator 0.27°">
+				<opening unit="deg">0.27</opening>
+			</parallelPlateCollimator>
+			<receivingSlit id="22070001" name="Parallel plate collimator slit">
+				<height unit="mm">0.10</height>
+			</receivingSlit>
+			<detector id="7010011" name="Proportional detector Xe" xsi:type="pointDetectorType">
+				<phd>
+					<lowerLevel unit="%">35.0</lowerLevel>
+					<upperLevel unit="%">80.0</upperLevel>
+				</phd>
+			</detector>
+		</diffractedBeamPath>
+		<scan appendNumber="0" mode="Continuous" scanAxis="2Theta-Omega" status="Completed">
+			<header>
+				<startTimeStamp>2020-01-30T13:19:23+00:00</startTimeStamp>
+				<endTimeStamp>2020-01-30T13:25:05+00:00</endTimeStamp>
+				<author>
+					<name>X-ray User</name>
+				</author>
+				<source>
+					<applicationSoftware version="5.2a">Data Collector</applicationSoftware>
+					<instrumentControlSoftware version="2.2B 20140619">XPERT-PRO</instrumentControlSoftware>
+					<instrumentID>0000000011014754</instrumentID>
+				</source>
+			</header>
+			<scanAxisCenter>
+				<position axis="2Theta" unit="deg">2.5000</position>
+				<position axis="Omega" unit="deg">1.2500</position>
+			</scanAxisCenter>
+			<reflection>
+				<hkl>
+					<h>0</h>
+					<k>0</k>
+					<l>0</l>
+				</hkl>
+			</reflection>
+			<dataPoints>
+				<positions axis="2Theta" unit="deg">
+					<startPosition>0.0100</startPosition>
+					<endPosition>4.9900</endPosition>
+				</positions>
+				<positions axis="Omega" unit="deg">
+					<startPosition>0.0050</startPosition>
+					<endPosition>2.4950</endPosition>
+				</positions>
+				<positions axis="Phi" unit="deg">
+					<commonPosition>0.00</commonPosition>
+				</positions>
+				<positions axis="Chi" unit="deg">
+					<commonPosition>0.00</commonPosition>
+				</positions>
+				<positions axis="X" unit="mm">
+					<commonPosition>0.00</commonPosition>
+				</positions>
+				<positions axis="Y" unit="mm">
+					<commonPosition>0.00</commonPosition>
+				</positions>
+				<positions axis="Z" unit="mm">
+					<commonPosition>6.760</commonPosition>
+				</positions>
+				<beamAttenuationFactors>119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 119.20 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00</beamAttenuationFactors>
+				<commonCountingTime unit="seconds">0.50</commonCountingTime>
+				<intensities unit="counts">13282456 12879083 8390488 4563811 2335963 1417169 1169590 1278420 1401315 1577612 1723394 1870367 2039750 2176592 2331552 2449560 2593792 2751971 2895845 3045799 3152483 3300529 3449410 3571471 3708193 3803911 3942540 4033728 4146253 4264976 4379170 4455696 4533295 4703871 4799588 4862168 4973143 5033935 5132514 5187227 5294626 5376039 5429918 5450778 5336346 5329909 5338134 5316320 5363523 5333604 5390701 5372344 5386529 5371152 5392847 5407508 5388079 5318704 5304639 5230377 5185200 5101641 5021777 4870631 4735816 4507071 4288578 4040999 3771488 3456204 3052712 2645287 2269926 1848196 1484755 1146466 859194 635098 463688 349375 267485 224215 184758 155920 142426 132157 127081 127360 128574 129655 126735 120413 113598 111509 113024 116999 119516 116658 110112 99124 89438 84443 83678 85744 88720 87361 80525 70918 60445 51778 47558 48488 50187 52717 51274 46105 39073 31238 25107 21750 21633 23063 24818 25448 23880 20023 15624 11134 8291 7175 7561 8870 9832 10218 9563 8005 5662 3720 2460 1736 2067 2664 3250 3723 3695 3147 2392 1517 986 765 888 1027 1238 1377 1360 1220 1160 963 1033 1006 1130 1098 1121 959 918 765 690 761 899 1151 1371 1371 1303 1128 907 713 613 637 741 935 1174 1340 1492 1358 1152 902 692 531 550 672 909 1091 1171 1357 1214 1044 892 644 568 548 588 790 900 1057 1079 1066 922 753 698 567 515 582 654 750 839 948 880 854 725 612 579 537 581 642 671 740 713 782 710 641 663 613 623 601 583 646 638 664 596 639 575 594 561 584 606 601 565 564 563 542 552 552 561 561 552 550 591 550 542 513 518 537 547 524 515 555 533 565 507 517 487 488 477 473 474 490 485 496 519 517 477 471 458 447 454 426 420 453 432 504 431 464 467 419 391 419 396 398 409 448 404 425 474 415 430 372 349 331 373 372 365 338 374 350 354 384 319 325 304 328 323 305 302 333 307 338 317 312 330 325 342 332 314 296 318 295 305 325 291 271 275 297 294 279 269 285 285 276 237 248 262 281 242 261 249 262 237 278 219 233 215 215 233 231 217 244 214 186 216 196 205 204 193 180 201 184 211 172 200 176 167 193 181 191 192 165 186 148 164 157 184 169 157 163 138 175 152 132 139 144 130 148 125 136 124 143 129 125 120 102 125 129 103 105 129 122 106 125 100 111 99 121 97 89 111 106 90 117 89 108 105 91 87 78 90 79 104 82 90 79 93 73 82 80 86 73 73 64 64 79 64 64 66 65 73 85 81 51 70 51 64 61 50 67 47 53 53 61 68 54 66 56 51 55 67 44 61 44 50 48 48 51 48 52 44 40 48 44 36 45 44 34 37 35 43 37 34 39 38</intensities>
+			</dataPoints>
+		</scan>
+	</xrdMeasurement>
+</xrdMeasurements>
