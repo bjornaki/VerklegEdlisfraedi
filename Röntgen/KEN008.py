@@ -9,7 +9,6 @@ DataXRD = Xray.readDataFile(filename)
 
 #Setting up data
 DataXRD = Xray.DataSetup(DataXRD, filename)
-pdb.set_trace()
 
 #Plotting Data
 fig, ax = Xray.PlotData(DataXRD, yaxis="log")
@@ -21,8 +20,10 @@ DataXRR = Xray.readDataFile(filename)
 
 #Setting up data
 DataXRR = Xray.DataSetup(DataXRR, filename)
-pdb.set_trace()
+
+#Finding peaks in XRR data
+DataXRR = Xray.FilmThickness(DataXRR)
 
 #Plotting Data
-fig2, ax2 = Xray.PlotData(DataXRR, yaxis="log")
+fig2, ax2 = Xray.PlotData(DataXRR, yaxis="log", XRR=True, Filtered=True)
 plt.show()
