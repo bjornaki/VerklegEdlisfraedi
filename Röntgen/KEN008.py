@@ -24,6 +24,9 @@ DataXRR = Xray.DataSetup(DataXRR, filename)
 #Finding peaks in XRR data
 DataXRR = Xray.FilmThickness(DataXRR)
 
+#Finding the critcal angle
+Data = Xray.CriticalAngle(DataXRR,[0.5,0.9])
+
 #Plotting Data
-fig2, ax2 = Xray.PlotData(DataXRR, yaxis="log", XRR=True, Filtered=True)
+fig2, ax2 = Xray.PlotData(DataXRR, yaxis="log", XRR=True, Filtered=True, ThetaCr = True)
 plt.show()
