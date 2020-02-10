@@ -31,7 +31,7 @@ def DataSetup(Data, filename):
     return AllData
 
 #Plotting Data
-def PlotData(Data, yaxis = "log", XRR = False, Filtered = False):
+def PlotData(Data, yaxis = "log", XRR = False, Filtered = False, ThetaCr = False):
     fig, ax = plt.subplots()
     ax.plot(Data['2Theta'],Data['Intensity'])
     ax.grid(alpha=0.3)
@@ -44,6 +44,8 @@ def PlotData(Data, yaxis = "log", XRR = False, Filtered = False):
         ax.plot(Data['2Theta'][Data['Peaks']],Data['Intensity'][Data['Peaks']],'*')
     if Filtered == True:
         ax.plot(Data['2Theta'],Data['IntensFiltered'])
+    if ThetaCr == True:
+        ax.axvline(x=Data['ThetaCritical'])
 
     #specify xrange
     ax.set_xlim([min(Data['2Theta']),max(Data['2Theta'])])
@@ -63,3 +65,19 @@ def FilmThickness(Data):
     #Data['Peak properties'] = properties
 
     return Data
+
+#Function to find the crytical angle
+def CriticalAngle(Data, Range):
+    #Specify a certain range where the critical angle is
+    Index = np.where((Data['2Theta'] <= Range[1]) & (Data['2Theta'] >= Range[0]))
+    gradient = np.gradient(Data['Intensity'][Index])#Calculating the gradient
+    MaxGrad = max(gradient)#Finding the maximum in the gradient
+    MaxGradIndex = np.where(gradient == MaxGrad)    
+    FinalIndex = Index[0][MaxGradIndex[0][0]]
+    #Assigning the critical angle
+    ThetaCritical = Data['2Theta'][FinalIndex]
+
+    Data['ThetaCritical'] = ThetaCritical
+
+    return Data
+
