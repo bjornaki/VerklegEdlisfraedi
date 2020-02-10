@@ -52,7 +52,6 @@ def PlotData(Data, yaxis = "log", XRR = False, Filtered = False, ThetaCr = False
 
     return fig, ax
 
-# test
 
 #Function to get the film thickness
 def FilmThickness(Data):
