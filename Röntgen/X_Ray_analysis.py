@@ -61,7 +61,7 @@ def FilmThickness(Data, range):
     #Finding peaks
     peaks = find_peaks_cwt(FilteredIntens,np.arange(0.1,0.5,0.1))
 
-    Data['IntensFiltered'] = FilteredIntens
+    Data['IntensFiltered'] = FilteredIntens#Appending filtered intensity
     #Data['Peak properties'] = properties
 
     PeaksInRangeIndex = np.where((Data['2Theta'][peaks] <= range[1]) & (Data['2Theta'][peaks] >= range[0]))
