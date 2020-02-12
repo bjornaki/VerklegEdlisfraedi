@@ -68,9 +68,12 @@ def FilmThickness(Data, range):
     PeaksTrue = peaks[PeaksInRangeIndex[0]]#The peaks within the specified range
     m = np.arange(1,len(PeaksTrue)+1,1)#Number of peaks for use with thickness model
     m_2 = m**2#m squared
-    Theta_m = Data['2Theta'][PeaksTrue]/2 #divide by two because of twoTheta
+    TwoTheta_m = Data['2Theta'][PeaksTrue]
+    Theta_m = TwoTheta_m/2
+    #divide by two because of twoTheta
     Theta_m_2 = Theta_m**2
     Theta_Critical = Data['2ThetaCritical']/2
+    pdb.set_trace()
     #Doing a linear fit
     #def LinearModel(x,y,thetaCritical,slope):
     #    return 
@@ -84,11 +87,13 @@ def FilmThickness(Data, range):
     x = np.linspace(min(m_2),max(m_2))
     y = np.polyval(p,x)
     ax.plot(x,y)
+    ax.set_xlabel(r"$m^2$")
+    ax.set_ylabel(r"$\theta_m^2$")
     plt.show()
 
     #Evaluating the thickness
     Cu_alpha_1 = 0.15406#nm
-    thickness = Cu_alpha_1/(2*(p[0]**0.5))
+    thickness = Cu_alpha_1/(2*(np.sqrt(p[0])))
     print(thickness, "[nm]")
     print(p)
     #Evaluating thickness from Fourier Transform
