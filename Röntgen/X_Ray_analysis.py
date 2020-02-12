@@ -61,7 +61,6 @@ def FilmThickness(Data, range):
     #Finding peaks
     peaks = find_peaks_cwt(FilteredIntens,np.arange(0.1,0.5,0.1))
 
-    Data['Peaks'] = peaks
     Data['IntensFiltered'] = FilteredIntens
     #Data['Peak properties'] = properties
 
@@ -75,6 +74,7 @@ def FilmThickness(Data, range):
     #Doing a linear fit
     #def LinearModel(x,y,thetaCritical,slope):
     #    return 
+    Data['Peaks'] = PeaksTrue
     
     #Plotting
     fig, ax = plt.subplots()
@@ -87,9 +87,9 @@ def FilmThickness(Data, range):
     plt.show()
 
     #Evaluating the thickness
-    Cu_alpha_1 = 1.5406#ångstrom
+    Cu_alpha_1 = 0.15406#nm
     thickness = Cu_alpha_1/(2*(p[0]**0.5))
-    print(thickness)
+    print(thickness, "[nm]")
     print(p)
     #Evaluating thickness from Fourier Transform
     index = np.where((Data['2Theta'] <= range[1]) & (Data['2Theta'] >= range[0]))
