@@ -40,11 +40,11 @@ def PlotData(Data, yaxis = "log", XRR = False, Filtered = False, ThetaCr = False
     if yaxis == "log":
         plt.yscale("log")
 
-    if XRR == True:
+    if XRR:
         ax.plot(Data['2Theta'][Data['Peaks']],Data['Intensity'][Data['Peaks']],'*')
-    if Filtered == True:
+    if Filtered:
         ax.plot(Data['2Theta'],Data['IntensFiltered'])
-    if ThetaCr == True:
+    if ThetaCr:
         ax.axvline(x=Data['ThetaCritical'])
 
     #specify xrange
@@ -54,17 +54,18 @@ def PlotData(Data, yaxis = "log", XRR = False, Filtered = False, ThetaCr = False
 
 
 #Function to get the film thickness
-def FilmThickness(Data):
+def FilmThickness(Data, width=np.arange(0.1,0.5,0.1)):
     #Filter Data for reference
     FilteredIntens = savgol_filter(Data['Intensity'],7,3)
     #Finding peaks
-    peaks = find_peaks_cwt(FilteredIntens,np.arange(0.1,0.5,0.1))
+    peaks = find_peaks_cwt(FilteredIntens, width)
 
     Data['Peaks'] = peaks
     Data['IntensFiltered'] = FilteredIntens
     #Data['Peak properties'] = properties
 
     return Data
+
 
 #Function to find the crytical angle
 def CriticalAngle(Data, Range):
@@ -81,3 +82,27 @@ def CriticalAngle(Data, Range):
 
     return Data
 
+
+def get_peaks(x, y, interval):
+
+    # Interval: n x 2 array with 1 peak per interval
+    # Returns x,y location of peaks
+
+    peaks = np.zeros_like(interval, dtype=float)
+    for i in range(len(interval)):
+        ind = [np.where(x > interval[i, 0])[0][0], np.where(x > interval[i, 1])[0][0]]
+
+        ind_max = np.where(y == max(y[ind[0]:ind[1]]))
+
+        if np.shape(ind_max)[1] != 1:
+            ind_max = ind_max[0][1]
+        else:
+            print(ind_max)
+            ind_max = ind_max[0][0]
+
+        print(x[ind_max])
+        peaks[i, 0] = x[ind_max]
+        print(peaks[i,0])
+        peaks[i, 1] = y[ind_max]
+
+    return peaks[:,0], peaks[:,1]
