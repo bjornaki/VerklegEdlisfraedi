@@ -45,7 +45,7 @@ def PlotData(Data, yaxis = "log", XRR = False, Filtered = False, ThetaCr = False
     if Filtered == True:
         ax.plot(Data['2Theta'],Data['IntensFiltered'])
     if ThetaCr == True:
-        ax.axvline(x=Data['ThetaCritical'])
+        ax.axvline(x=Data['2ThetaCritical'])
 
     #specify xrange
     ax.set_xlim([min(Data['2Theta']),max(Data['2Theta'])])
@@ -54,7 +54,7 @@ def PlotData(Data, yaxis = "log", XRR = False, Filtered = False, ThetaCr = False
 
 
 #Function to get the film thickness
-def FilmThickness(Data):
+def FilmThickness(Data, range):
     #Filter Data for reference
     FilteredIntens = savgol_filter(Data['Intensity'],7,3)
     #Finding peaks
@@ -64,6 +64,40 @@ def FilmThickness(Data):
     Data['IntensFiltered'] = FilteredIntens
     #Data['Peak properties'] = properties
 
+    PeaksInRangeIndex = np.where((Data['2Theta'][peaks] <= range[1]) & (Data['2Theta'][peaks] >= range[0]))
+    PeaksTrue = peaks[PeaksInRangeIndex[0]]#The peaks within the specified range
+    m = np.arange(1,len(PeaksTrue)+1,1)#Number of peaks for use with thickness model
+    m_2 = m**2#m squared
+    Theta_m = Data['2Theta'][PeaksTrue]/2 #divide by two because of twoTheta
+    Theta_m_2 = Theta_m**2
+    Theta_Critical = Data['2ThetaCritical']/2
+    #Doing a linear fit
+    #def LinearModel(x,y,thetaCritical,slope):
+    #    return 
+    
+    #Plotting
+    fig, ax = plt.subplots()
+    ax.plot(m_2,Theta_m_2,'+')
+    #Simple linear fit
+    p = np.polyfit(m_2,Theta_m_2,1)
+    x = np.linspace(min(m_2),max(m_2))
+    y = np.polyval(p,x)
+    ax.plot(x,y)
+    plt.show()
+
+    #Evaluating the thickness
+    Cu_alpha_1 = 1.5406#ångstrom
+    thickness = Cu_alpha_1/(2*(p[0]**0.5))
+    print(thickness)
+    print(p)
+    #Evaluating thickness from Fourier Transform
+    index = np.where((Data['2Theta'] <= range[1]) & (Data['2Theta'] >= range[0]))
+    fig2, ax2 = plt.subplots()
+    fourier = np.fft.fft(Data['Intensity'][index])
+    fourierFreq = np.fft.fftfreq(Data['2Theta'][index].shape[-1])
+    ax2.plot(fourierFreq,fourier.real,fourierFreq,fourier.imag)
+
+
     return Data
 
 #Function to find the crytical angle
@@ -71,13 +105,13 @@ def CriticalAngle(Data, Range):
     #Specify a certain range where the critical angle is
     Index = np.where((Data['2Theta'] <= Range[1]) & (Data['2Theta'] >= Range[0]))
     gradient = np.gradient(Data['Intensity'][Index])#Calculating the gradient
-    MaxGrad = max(gradient)#Finding the maximum in the gradient
-    MaxGradIndex = np.where(gradient == MaxGrad)    
+    MaxGrad = max(abs(gradient))#Finding the maximum in the gradient
+    MaxGradIndex = np.where(abs(gradient) == MaxGrad)    
     FinalIndex = Index[0][MaxGradIndex[0][0]]
     #Assigning the critical angle
     ThetaCritical = Data['2Theta'][FinalIndex]
 
-    Data['ThetaCritical'] = ThetaCritical
+    Data['2ThetaCritical'] = ThetaCritical
 
     return Data
 
