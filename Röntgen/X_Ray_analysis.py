@@ -31,16 +31,23 @@ def DataSetup(Data, filename):
     return AllData
 
 #Plotting Data
-def PlotData(Data, yaxis = "log", XRR = False, Filtered = False, ThetaCr = False):
-    fig, ax = plt.subplots()
-    ax.plot(Data['2Theta'],Data['Intensity'])
+def PlotData(Data, fig, ax, yaxis = "log", XRR = False, Filtered = False, ThetaCr = False, showPeaks = False, shift = False,shiftVal = 0,scanAxis = "2Theta"):
+    if fig == None:
+        fig, ax = plt.subplots()
+    if shift:
+        ax.plot(Data['2Theta'],Data['Intensity']*shiftVal,label=Data['Filename'][0:6])
+    else:
+        ax.plot(Data['2Theta'],Data['Intensity'],label=Data['Filename'][0:6])
     ax.grid(alpha=0.3)
-    ax.set_xlabel(r"2$\theta$")
+    if scanAxis == "2Theta":
+        ax.set_xlabel(r"2$\theta$ [deg]")
+    elif scanAxis == "Phi":
+        ax.set_xlabel(r"$\phi$ [deg]")
     ax.set_ylabel("cps")
     if yaxis == "log":
         plt.yscale("log")
 
-    if XRR == True:
+    if showPeaks == True:
         ax.plot(Data['2Theta'][Data['Peaks']],Data['Intensity'][Data['Peaks']],'*')
     if Filtered == True:
         ax.plot(Data['2Theta'],Data['IntensFiltered'])
@@ -49,6 +56,9 @@ def PlotData(Data, yaxis = "log", XRR = False, Filtered = False, ThetaCr = False
 
     #specify xrange
     ax.set_xlim([min(Data['2Theta']),max(Data['2Theta'])])
+
+    #Specify ticks
+    plt.tick_params(right=True, top=True, direction='in', labelsize=18, size=14)
 
     return fig, ax
 
@@ -70,10 +80,10 @@ def FilmThickness(Data, range):
     m_2 = m**2#m squared
     TwoTheta_m = Data['2Theta'][PeaksTrue]
     Theta_m = TwoTheta_m/2
+    Theta_m = np.deg2rad(Theta_m)
     #divide by two because of twoTheta
     Theta_m_2 = Theta_m**2
     Theta_Critical = Data['2ThetaCritical']/2
-    pdb.set_trace()
     #Doing a linear fit
     #def LinearModel(x,y,thetaCritical,slope):
     #    return 
@@ -93,15 +103,16 @@ def FilmThickness(Data, range):
 
     #Evaluating the thickness
     Cu_alpha_1 = 0.15406#nm
-    thickness = Cu_alpha_1/(2*(np.sqrt(p[0])))
+    slope = p[0]
+    thickness = Cu_alpha_1/(2*(np.sqrt(slope)))
     print(thickness, "[nm]")
-    print(p)
     #Evaluating thickness from Fourier Transform
-    index = np.where((Data['2Theta'] <= range[1]) & (Data['2Theta'] >= range[0]))
-    fig2, ax2 = plt.subplots()
+    index = np.where((Data['2Theta'] >= Theta_Critical))
+    Theta_use = Data['2Theta'][index]
+    q_s = 4*np.pi/Cu_alpha_1*(np.cos(Theta_Critical*np.pi/180)**2-np.cos(Theta_use*np.pi/180)**2)**0.5
     fourier = np.fft.fft(Data['Intensity'][index])
     fourierFreq = np.fft.fftfreq(Data['2Theta'][index].shape[-1])
-    ax2.plot(fourierFreq,fourier.real,fourierFreq,fourier.imag)
+    #ax2.plot(fourierFreq,fourier.real,fourierFreq,fourier.imag)
 
 
     return Data
