@@ -11,7 +11,7 @@ DataXRD = Xray.readDataFile(filename)
 DataXRD = Xray.DataSetup(DataXRD, filename)
 
 #Plotting Data
-fig, ax = Xray.PlotData(DataXRD, yaxis="log")
+fig, ax = Xray.PlotData(DataXRD,None,None, yaxis="log")
 plt.show()
 
 #Then XRR data
@@ -28,5 +28,8 @@ Data = Xray.CriticalAngle(DataXRR,[0.5,0.7])
 DataXRR = Xray.FilmThickness(DataXRR,[0.85,2.4])
 
 #Plotting Data
-fig2, ax2 = Xray.PlotData(DataXRR, yaxis="log", XRR=True, Filtered=True, ThetaCr = True)
+fig2, ax2 = Xray.PlotData(DataXRR,None,None, yaxis="log", XRR=True, Filtered=True, ThetaCr = True)
 plt.show()
+
+#Fourier Thickness
+Xray.FourierThickness(DataXRR)
