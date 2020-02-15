@@ -106,13 +106,6 @@ def FilmThickness(Data, range):
     slope = p[0]
     thickness = Cu_alpha_1/(2*(np.sqrt(slope)))
     print(thickness, "[nm]")
-    #Evaluating thickness from Fourier Transform
-    index = np.where((Data['2Theta'] >= Theta_Critical))
-    Theta_use = Data['2Theta'][index]
-    q_s = 4*np.pi/Cu_alpha_1*(np.cos(Theta_Critical*np.pi/180)**2-np.cos(Theta_use*np.pi/180)**2)**0.5
-    fourier = np.fft.fft(Data['Intensity'][index])
-    fourierFreq = np.fft.fftfreq(Data['2Theta'][index].shape[-1])
-    #ax2.plot(fourierFreq,fourier.real,fourierFreq,fourier.imag)
 
 
     return Data
@@ -132,3 +125,50 @@ def CriticalAngle(Data, Range):
 
     return Data
 
+
+#function to calculate length bewtween crystalplanes
+def CrystPlanLength(a,h,k,l):
+    return a/np.sqrt(h**2 + k**2 + l**2)
+
+
+#Function to calculate Bragg peaks for crystal planes in 2Theta
+def BraggPeaks(d,lamb):
+    return 2*np.arcsin(lamb/(2*d))
+
+def FourierThickness(Data, fig2, ax2):
+    #Evaluating thickness from Fourier Transform
+    I = Data['Intensity']
+    Cu_alpha_1 = 0.15406#[nm]
+    Theta_Critical = Data['2ThetaCritical']
+    index = np.where((Data['2Theta'] > Theta_Critical))
+    Theta_use = Data['2Theta'][index]
+    #Mapping
+    q = 4*np.pi/Cu_alpha_1*(np.cos(Theta_Critical*np.pi/180)**2-np.cos(Theta_use*np.pi/180)**2)**0.5
+    #Preparing the data
+    Q = np.linspace(q[0],q[-1],len(Theta_use))
+    func = sp.interpolate.interp1d(q,I[index])
+    I_interp = func(Q)
+    I_interp = I_interp*Q**4 #due to rapid decrease in intensity
+    #Plotting
+    fig, ax = plt.subplots()
+    ax.plot(Q,I_interp)
+    #plotting Q^(-4)
+    x = np.linspace(Theta_use[0],Theta_use[-1],len(Theta_use))
+    def Q4(x):
+        return max(I)*(x**(-4))
+    y = Q4(x)
+    ax.plot(x,y)
+    plt.yscale('log')
+    plt.show()
+    #Taking the Fourier transform
+    fourier = np.abs(np.fft.fft(I_interp,len(Theta_use)))
+    Length = np.linspace(0,2*np.pi*len(Theta_use)/(Q[-1]-Q[0]),len(Theta_use))
+    #ax2.plot(fourierFreq,fourier.real,fourierFreq,fourier.imag)
+    #plotting the fourier transform
+    fig2,ax2 = plt.subplots()
+    ax2.plot(Length*2,fourier)
+    ax2.set_xlabel("Thickness [nm]")
+    ax2.set_ylabel("FFT")
+    ax2.grid(alpha=0.3)
+    ax2.set_xlim([0,120])
+    plt.show()
