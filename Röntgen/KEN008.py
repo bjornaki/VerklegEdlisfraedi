@@ -11,7 +11,7 @@ DataXRD = Xray.readDataFile(filename)
 DataXRD = Xray.DataSetup(DataXRD, filename)
 
 #Plotting Data
-fig, ax = Xray.PlotData(DataXRD, yaxis="log")
+fig, ax = Xray.PlotData(DataXRD, None, None, yaxis="log")
 plt.show()
 
 #Then XRR data
@@ -21,12 +21,17 @@ DataXRR = Xray.readDataFile(filename)
 #Setting up data
 DataXRR = Xray.DataSetup(DataXRR, filename)
 
-#Finding the critcal angle
+#Finding the critical angle
 Data = Xray.CriticalAngle(DataXRR,[0.5,0.7])
 
 #Finding peaks in XRR data
 DataXRR = Xray.FilmThickness(DataXRR,[0.9,4])
 
 #Plotting Data
-fig2, ax2 = Xray.PlotData(DataXRR, yaxis="log", XRR=True, Filtered=True, ThetaCr = True)
+fig2, ax2 = Xray.PlotData(DataXRR, None, None, yaxis="log", XRR=True, Filtered=False, ThetaCr = True, showPeaks=True)
+plt.savefig("KEN008_XRR.png",format="png",dpi=300)
 plt.show()
+
+#Fourier Thickness
+
+Xray.FourierThickness(DataXRR)
