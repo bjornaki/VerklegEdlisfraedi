@@ -33,7 +33,7 @@ def DataSetup(Data, filename):
 #Plotting Data
 def PlotData(Data, fig, ax, yaxis = "log", XRR = False, Filtered = False, ThetaCr = False, showPeaks = False, shift = False,shiftVal = 0,scanAxis = "2Theta"):
     if fig == None:
-        fig, ax = plt.subplots()
+        fig, ax = plt.subplots(figsize = (10,6.75))
     if shift:
         ax.plot(Data['2Theta'],Data['Intensity']*shiftVal,label=Data['Filename'][0:6])
     else:
@@ -53,6 +53,10 @@ def PlotData(Data, fig, ax, yaxis = "log", XRR = False, Filtered = False, ThetaC
         ax.plot(Data['2Theta'],Data['IntensFiltered'])
     if ThetaCr == True:
         ax.axvline(x=Data['2ThetaCritical'])
+
+    #Minor ticks
+    ax.tick_params(axis='y', which='minor', bottom=False)  
+        
 
     #specify xrange
     ax.set_xlim([min(Data['2Theta']),max(Data['2Theta'])])
@@ -77,6 +81,7 @@ def FilmThickness(Data, range):
     PeaksInRangeIndex = np.where((Data['2Theta'][peaks] <= range[1]) & (Data['2Theta'][peaks] >= range[0]))
     PeaksTrue = peaks[PeaksInRangeIndex[0]]#The peaks within the specified range
     m = np.arange(1,len(PeaksTrue)+1,1)#Number of peaks for use with thickness model
+    #m = m + 0.5 #According to article
     m_2 = m**2#m squared
     TwoTheta_m = Data['2Theta'][PeaksTrue]
     Theta_m = TwoTheta_m/2
@@ -93,13 +98,18 @@ def FilmThickness(Data, range):
     fig, ax = plt.subplots()
     ax.plot(m_2,Theta_m_2,'+')
     #Simple linear fit
-    p = np.polyfit(m_2,Theta_m_2,1)
+    p = np.polyfit(m_2,Theta_m_2,1)#Linear fit
     x = np.linspace(min(m_2),max(m_2))
     y = np.polyval(p,x)
     ax.plot(x,y)
     ax.set_xlabel(r"$m^2$")
     ax.set_ylabel(r"$\theta_m^2$")
     plt.show()
+    #Calculating the residue
+    LinearValue = np.polyval(p,m_2)
+    Residue = Theta_m_2 - LinearValue
+    Data['Residue'] = Residue
+    Data['m**2'] = m_2
 
     #Evaluating the thickness
     Cu_alpha_1 = 0.15406#nm
@@ -140,6 +150,7 @@ def FourierThickness(Data, fig2, ax2):
     I = Data['Intensity']
     Cu_alpha_1 = 0.15406#[nm]
     Theta_Critical = Data['2ThetaCritical']
+    Theta_Critical = Theta_Critical/2
     index = np.where((Data['2Theta'] > Theta_Critical))
     Theta_use = Data['2Theta'][index]
     #Mapping
@@ -159,16 +170,20 @@ def FourierThickness(Data, fig2, ax2):
     y = Q4(x)
     ax.plot(x,y)
     plt.yscale('log')
-    plt.show()
+    plt.close(fig)
+    #plt.show()
     #Taking the Fourier transform
     fourier = np.abs(np.fft.fft(I_interp,len(Theta_use)))
     Length = np.linspace(0,2*np.pi*len(Theta_use)/(Q[-1]-Q[0]),len(Theta_use))
     #ax2.plot(fourierFreq,fourier.real,fourierFreq,fourier.imag)
     #plotting the fourier transform
-    fig2,ax2 = plt.subplots()
-    ax2.plot(Length*2,fourier)
-    ax2.set_xlabel("Thickness [nm]")
+    if fig2 == None:
+        fig2, ax2 = plt.subplots(figsize=(10,6.75))
+    ax2.plot(Length*2,fourier,label=Data['Filename'][0:6])
+    ax2.set_xlabel("Þykkt [nm]")
     ax2.set_ylabel("FFT")
     ax2.grid(alpha=0.3)
     ax2.set_xlim([0,120])
-    plt.show()
+
+
+    return fig2, ax2
