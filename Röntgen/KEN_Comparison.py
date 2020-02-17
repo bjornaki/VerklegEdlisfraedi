@@ -3,6 +3,8 @@ import matplotlib.pyplot as plt
 import X_Ray_analysis as Xray
 import pdb
 
+#Adjust axis size
+plt.rcParams.update({'font.size': 14})
 
 #-----First comparing XRD-----#
 #Import data - first XRD
@@ -34,8 +36,7 @@ ax.text(67,10e7,"(400)",c="y",size = "large")#Si
 
 #legend
 ax.legend()
-plt.savefig("KEN_XRD_Comparison.png",format="png",dpi=300,size=(12,6.75))
-plt.show()
+plt.savefig("KEN_XRD_Comparison.png",format="png",dpi=300,bbox_inches='tight')
 
 #Figure of KEN008 with phi = 90, out of plane measurement
 #Import data - first XRD
@@ -48,7 +49,7 @@ DataXRD008 = Xray.DataSetup(DataXRD008, filename008)
 #Plotting Data
 fig0, ax0 = Xray.PlotData(DataXRD008,None,None, yaxis="linear", shift=False, scanAxis = "Phi")
 ax0.legend()
-plt.savefig("KEN008_phi180.png",format="png",dpi=300,size=(12,6.75))
+plt.savefig("KEN008_phi180.png",format="png",dpi=300,bbox_inches='tight')
 
 #-------Then comparing XRR------#
 filename008 = "KEN008_XRR_0_5deg.xy"
@@ -72,5 +73,22 @@ DataXRR009 = Xray.FilmThickness(DataXRR009,[0.9,4])
 fig2, ax2 = Xray.PlotData(DataXRR008, None, None, yaxis="log", XRR=True, Filtered=False, ThetaCr = False, shift = True, shiftVal = 10)
 fig2, ax2 = Xray.PlotData(DataXRR009, fig2, ax2, yaxis="log", XRR=True, Filtered=False, ThetaCr = False)
 ax2.legend(["KEN008","KEN009"])
-plt.savefig("KEN_XRR_Comparison.png",format="png",dpi=300)
-plt.show()
+plt.savefig("KEN_XRR_Comparison.png",format="png",dpi=300,bbox_inches='tight')
+
+#Fourier Thickness
+fig3, ax3 = Xray.FourierThickness(DataXRR008,None,None)
+fig3, ax3 = Xray.FourierThickness(DataXRR009,fig3,ax3)
+ax3.legend(loc = 1)
+plt.savefig("Fourier_Comparison.png",format="png",dpi=300,bbox_inches='tight')
+
+#Density
+print("Fyrir KEN008 er krítískt horn:",DataXRR008['2ThetaCritical']/2)
+print("Fyrir KEN009 er krítískt horn:",DataXRR009['2ThetaCritical']/2)
+r0 = 2.82e-15
+A = 9.2733e-26
+Z = 26
+Na = 6.022e23
+lamb = 0.15406e-9
+ThetaC = np.deg2rad(0.35)
+rho = ((ThetaC**2)*(np.pi*A)) / (r0*lamb**2*Na*Z)
+print("Massaþéttleikinn er: ",rho)
