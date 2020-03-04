@@ -1,0 +1,2 @@
+README fyrir segulvægistilraun
+
