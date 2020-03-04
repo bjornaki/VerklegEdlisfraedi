@@ -1,0 +1,15 @@
+Liður 3 var kraftur á vægi í sviði með gradíent:
+Fyrsta mæling bara lóð engin kúla. 
+
+
+m [g]	I [A]	I_error [A]	litlar k.	stórar k.	kúlur
+144.06	0	0.02		3		4		4 stórar + 3 litlar
+X	0.50	0.02		6		4		4 stórar + 6 litlar
+145.84	1.00	0.02		2		6		6 stórar + 2 litlar
+X	1.45	0.02		7		4		4 stórar + 7 litlar
+X	2.9	0.02		7		5		5 stórar + 7 litlar
+X	1.8	0.02		3		6		6 stórar + 3 litlar
+X	2.45	0.02		4		6		6 stórar + 4 litlar
+X	3.10	0.02		5		6		6 stórar + 5 litlar
+X	3.75	0.02		6		6		6 stórar + 6 litlar
+

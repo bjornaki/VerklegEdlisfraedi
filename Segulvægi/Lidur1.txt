@@ -1,0 +1,20 @@
+Liður 1: Mælt þannig að vægi er balanserað
+glært lóð á enda stangar: 1.36
+minni stöng: 0.60g
+lengri stöng: 0.90 g
+
+Ath: Notuð var lengri stöng
+lengd stangar inni í kúlu og inni í nabba: 3.91 cm
+bæta við helming af glæru lóði á enda stangar: 0.475 cm
+
+þ.e. tökum mælingu á cm fresti 
+
+
+I [A]	r [cm]	I_error [A]	r_error[cm]
+2.2	4.385	0.02	
+2.4	5.385	0.02	
+2.63	6.385	0.02
+2.91	7.385	0.02
+3.1	8.385	0.02
+3.35	9.385	0.02
+3.6	10.385	0.02
