@@ -1,5 +1,5 @@
 Liður 1: Mælt þannig að vægi er balanserað
-glært lóð á enda stangar: 1.36
+glært lóð á enda stangar: 1.36g
 minni stöng: 0.60g
 lengri stöng: 0.90 g
 
