@@ -2,9 +2,9 @@ Gogn fyrir lid 4 i segulvaegi.
 Ath: Einhver gaetu verid a yfirton
 
 
-I [A]	tidni [Hz]	t(1) [s]
+I [A]	tidni [Hz]	t(1) [s]	Comment:
 1.0	14.5		32.7
-1.0	10.6		15.95
+1.0	5.3		15.95		Tidni var 10.6!
 1.0	14.6		32.2
 1.0	20.0		43.69
 2.0	11.5		15.16
