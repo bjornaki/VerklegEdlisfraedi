@@ -36,7 +36,7 @@ dB_dz = 1.69e-2*Current
 p = np.polyfit(dB_dz[1:-1]/g,Massi[1:-1],1)
 x = np.linspace(min(dB_dz/g),max(dB_dz/g))
 y = np.polyval(p,x)
-print(p, "Am^2")
+print(p[0], "Am^2")
 
 #Plotting
 fig, ax = plt.subplots()

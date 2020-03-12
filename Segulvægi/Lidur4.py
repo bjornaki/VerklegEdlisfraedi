@@ -33,10 +33,11 @@ for i in range(n):
     Sveiflutimi[i] = temp[3]
 
 #Reikna naudsynlegar staerdir
-L = I*Tidni#Hverfiþungi
+L = I*(Tidni*2*np.pi)#Hverfiþungi
 VeltuTidni = (2*np.pi)/Sveiflutimi
 #Segulsvid i spolu
 B = (mu0*n_spola*Current*(R_spola**2))/((R_spola**2 + (h_spola/2)**2)**(3/2))
+
 
 #Gera linulegt fit
 #Straumur = 1A
