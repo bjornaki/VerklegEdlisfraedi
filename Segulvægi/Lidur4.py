@@ -33,58 +33,61 @@ for i in range(n):
     Sveiflutimi[i] = temp[3]
 
 #Reikna naudsynlegar staerdir
+#L = I*(Tidni*2*np.pi)#Hverfiþungi
 L = 2*np.pi*I*Tidni#Hverfiþungi
 VeltuTidni = (2*np.pi)/Sveiflutimi
 #Segulsvid i spolu
 B = (mu0*n_spola*Current*(R_spola**2))/((R_spola**2 + (h_spola/2)**2)**(3/2))
 
+
 #Gera linulegt fit
 #Straumur = 1A
 p1 = np.polyfit(B[0:4]/L[0:4],VeltuTidni[0:4],1)
-x1 = np.linspace(min(B/L),max(B/L))
+x1 = np.linspace(min(B/L)-1,max(B/L)+1)
 y1 = np.polyval(p1,x1)
 segulvaegi1 = p1[0]
-print(segulvaegi1)
+print("Svið:", B[2],"segulvaegi:",segulvaegi1,"Am^2")
 #Straumur = 2A
 p2 = np.polyfit(B[4:9]/L[4:9],VeltuTidni[4:9],1)
 x2 = np.linspace(min(B/L),max(B/L))
 y2 = np.polyval(p2,x2)
 segulvaegi2 = p2[0]
-print(segulvaegi2)
+print("Svið:", B[5],"segulvaegi:",segulvaegi2,"Am^2")
 #Straumur = 3A
 p3 = np.polyfit(B[9:14]/L[9:14],VeltuTidni[9:14],1)
 x3 = np.linspace(min(B/L),max(B/L))
 y3 = np.polyval(p3,x3)
 segulvaegi3 = p3[0]
-print(segulvaegi3)
+print("Svið:", B[10],"segulvaegi:",segulvaegi3,"Am^2")
 #Straumur = 3.5A
 p4 = np.polyfit(B[14:19]/L[14:19],VeltuTidni[14:19],1)
 x4 = np.linspace(min(B/L),max(B/L))
 y4 = np.polyval(p4,x4)
 segulvaegi4 = p4[0]
-print(segulvaegi4)
+print("Svið:", B[15],"segulvaegi:",segulvaegi4,"Am^2")
 
 
 #Plotting
-fig, ax = plt.subplots()
+fig, axs = plt.subplots(2,2)
 #Straumur = 1A
 label = "B = " + str(B[2])[0:8] + " [T]"
-ax.plot(B[0:4]/L[0:4],VeltuTidni[0:4],'+',label=label,ms=15)
-ax.plot(x1,y1,label="_nolabel_")
+axs[0,0].plot(B[0:4]/L[0:4],VeltuTidni[0:4],'+',label=label,ms=15)
+axs[0,0].plot(x1,y1,label="_nolabel_")
 #Straumur = 2A
 label = "B = " + str(B[5])[0:8] + " [T]"
-ax.plot(B[4:9]/L[4:9],VeltuTidni[4:9],'+',label=label,ms=15)
-ax.plot(x2,y2,label="_nolabel_")
+axs[0,1].plot(B[4:9]/L[4:9],VeltuTidni[4:9],'+',label=label,ms=15)
+axs[0,1].plot(x2,y2,label="_nolabel_")
 #Straumur = 3A
 label = "B = " + str(B[10])[0:8] + " [T]"
-ax.plot(B[9:14]/L[9:14],VeltuTidni[9:14],'+',label=label,ms=15)
-ax.plot(x3,y3,label="_nolabel_")
+axs[1,0].plot(B[9:14]/L[9:14],VeltuTidni[9:14],'+',label=label,ms=15)
+axs[1,0].plot(x3,y3,label="_nolabel_")
 #Straumur = 3.5A
 label = "B = " + str(B[15])[0:8] + " [T]"
-ax.plot(B[14:19]/L[14:19],VeltuTidni[14:19],'+',label=label,ms=15)
-ax.plot(x4,y4,label="_nolabel_")
+axs[1,1].plot(B[14:19]/L[14:19],VeltuTidni[14:19],'+',label=label,ms=15)
+axs[1,1].plot(x4,y4,label="_nolabel_")
 #Stilla plot
-ax.set_xlabel("B/L")
-ax.set_ylabel(r"$\Omega_p$ Veltitidni")
-ax.legend()
+axs[0,0].set_xlabel(r"$\frac{B}{L}$")
+axs[0,0].set_ylabel(r"$\Omega_p [\frac{rad}{s}]$ [Eining]")
+axs[0,0].legend()
+#axs[0,0].set_xlim([0,4])
 plt.show()
