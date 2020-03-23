@@ -9,10 +9,10 @@ Vz = -4e-4  # offset voltage on the scope, often different between measurements
 Iz = Vz/R  # offset current calculated form the resistance
 
 # Picking which datafile to load
-Number = np.arange(41)
+Number = np.arange(41, 107)
 
 # Picking which dataset to plot
-PlotSelect = 25
+PlotSelect = 56
 
 # Select which data to include in histogram
 # Can be vector with the number of filenames
@@ -113,6 +113,8 @@ def fig2():
     for n in range(1, 25):
         plt.plot([min(T[PS]), max(T[PS])], [n, n])
 
+    plt.axis([min(T[PS]), max(T[PS]), -1, 20])
+
 
 def fig3():
 
@@ -122,7 +124,6 @@ def fig3():
     # Select the bin width for the Current data and calculate number of bins
     BW = 8e-7
     bins = int((binrange[1]-binrange[0])/BW)
-    print(bins)
 
     plt.hist(TOT, bins=bins, range=(binrange[0], binrange[1]))
 
@@ -132,6 +133,9 @@ def fig3():
     for n in range(1, 25):
         I = (V0/R) / (1 + 12.9e3/R)
         plt.plot([I, I], [0, 100])
+
+    plt.axis([-0.5e-5, 5e-5, 0, 1000])
+
 
 
 def fig4():

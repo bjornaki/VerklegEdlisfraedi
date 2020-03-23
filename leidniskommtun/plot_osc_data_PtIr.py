@@ -122,7 +122,6 @@ def fig3():
     # Select the bin width for the Current data and calculate number of bins
     BW = 8e-7
     bins = int((binrange[1]-binrange[0])/BW)
-    print(bins)
 
     plt.hist(TOT, bins=bins, range=(binrange[0], binrange[1]))
 
