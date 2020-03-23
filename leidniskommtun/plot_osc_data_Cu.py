@@ -3,6 +3,11 @@ import matplotlib.pyplot as plt
 
 Maeligogn = 'Maeligogn_Cu_headon/'
 
+
+# Góð mæligögn fyrir tímagraf
+# 56, 57, 71, 83
+
+
 V0 = 0.1014  # power supply voltage
 R = 1000  # Resistor value
 Vz = -4e-4  # offset voltage on the scope, often different between measurements

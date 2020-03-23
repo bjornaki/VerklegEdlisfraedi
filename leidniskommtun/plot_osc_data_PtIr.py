@@ -3,6 +3,11 @@ import matplotlib.pyplot as plt
 
 Maeligogn = 'Maeligogn_PtIr_headon/'
 
+
+
+# Góðar skrár fyrir tímagraf: 16, 25, Sérstaklega 25
+
+
 V0 = 0.1014  # power supply voltage
 R = 1000  # Resistor value
 Vz = -4e-4  # offset voltage on the scope, often different between measurements
