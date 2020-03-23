@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+Maeligogn = 'Maeligogn_PtIr_headon/'
 
 V0 = 0.1014  # power supply voltage
 R = 1000  # Resistor value
@@ -37,10 +38,11 @@ VR = [np.array([])] * len(Number)
 I = [np.array([])] * len(Number)
 G = [np.array([])] * len(Number)
 
-# Load all datafiles
 
+
+# Load all datafiles
 for i in range(len(Number)):
-    filename = 'Maeligogn_PtIr_headon/' + 'scope_' + str(Number[i]) + '.csv'
+    filename = Maeligogn + 'scope_' + str(Number[i]) + '.csv'
 
     f = open(filename, 'r')
 
