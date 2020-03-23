@@ -136,7 +136,7 @@ def fig3():
     plt.ylabel('Occurrence [Counts]')
 
     for n in range(1, 25):
-        I = (V0/R) / (1 + 12.9e3/R)
+        I = (V0/R) / (1 + (12.9e3/R)/n)
         plt.plot([I, I], [0, 100])
 
     plt.axis([-0.5e-5, 5e-5, 0, 1000])

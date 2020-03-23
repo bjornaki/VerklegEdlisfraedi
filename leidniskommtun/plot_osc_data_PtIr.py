@@ -128,13 +128,15 @@ def fig3():
     BW = 8e-7
     bins = int((binrange[1]-binrange[0])/BW)
 
+    print(bins)
     plt.hist(TOT, bins=bins, range=(binrange[0], binrange[1]))
 
     plt.xlabel('Current [A]')
     plt.ylabel('Occurrence [Counts]')
 
     for n in range(1, 25):
-        I = (V0/R) / (1 + 12.9e3/R)
+        I = (V0/R) / (1 + (12.9e3/R)/n)
+
         plt.plot([I, I], [0, 100])
 
 
