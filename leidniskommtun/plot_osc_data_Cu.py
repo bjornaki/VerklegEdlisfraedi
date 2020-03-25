@@ -102,9 +102,13 @@ def fig1():
 
     # Add expected lines
 
-    for n in range(1, 25):
-        In = V0 / (R + 12.9e3/n)  # E3 in matlab code???
+    for n in range(1, 24):
+        In = V0 / (R + 12.9e3/n)
         plt.plot([min(T[PS]), max(T[PS])], [In, In], 'r')
+
+    In = V0 / (R + 12.9e3 / 24)
+    plt.plot([min(T[PS]), max(T[PS])], [In, In], 'r', label=r'$G_n$')
+    plt.legend()
 
 
 def fig2():
@@ -116,7 +120,7 @@ def fig2():
     plt.ylabel('Conductance [2e^2/h]')
 
     for n in range(1, 25):
-        plt.plot([min(T[PS]), max(T[PS])], [n, n])
+        plt.plot([min(T[PS]), max(T[PS])], [n, n], 'r')
 
     plt.axis([min(T[PS]), max(T[PS]), -1, 20])
 
@@ -137,7 +141,7 @@ def fig3():
 
     for n in range(1, 25):
         I = (V0/R) / (1 + (12.9e3/R)/n)
-        plt.plot([I, I], [0, 100])
+        plt.plot([I, I], [0, 1000])
 
     plt.axis([-0.5e-5, 5e-5, 0, 1000])
 
@@ -148,15 +152,16 @@ def fig4():
 
     # Select the bin width for the Current data and calculate number of bins
     binrange = np.array([-1, 12])
-    BW = 0.1
+    BW = 0.05
     bins = int((binrange[1]-binrange[0])/BW)
+    print(bins)
 
     plt.hist(TOT_G/G0, bins=bins, range=binrange)
     plt.xlabel('Conductance [2e^2/h]')
     plt.ylabel('Occurrence [Counts]')
 
     for n in range(1, 25):
-        plt.plot([n, n], [0, 100])
+        plt.plot([n, n], [0, 1000])
 
     plt.axis([-0.5, 8, 0, 1000])
 

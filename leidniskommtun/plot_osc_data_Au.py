@@ -106,6 +106,11 @@ def fig1():
         In = V0 / (R + 12.9e3/n)  # E3 in matlab code???
         plt.plot([min(T[PS]), max(T[PS])], [In, In], 'r')
 
+    In = V0 / (R + 12.9e3 / 24)
+    plt.plot([min(T[PS]), max(T[PS])], [In, In], 'r', label=r'$G_n$')
+    plt.legend()
+
+
 
 def fig2():
     # Plot using determined conductance values of the nanowire 2e^2/h (G0)
