@@ -95,7 +95,7 @@ def Cu(fig=None, PlotSelect=None, Vz=None):
 
 
     T[PS] *= 1e6
-    T[PS] += 40
+    T[PS] += 20
     I[PS] *= 1e6
     V0 *= 1e6
 
@@ -182,5 +182,5 @@ def Cu(fig=None, PlotSelect=None, Vz=None):
         fig4()
 
 
-
+    return TOT_G
 

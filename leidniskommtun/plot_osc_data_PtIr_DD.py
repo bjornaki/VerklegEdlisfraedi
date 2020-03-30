@@ -181,5 +181,6 @@ def PtIr(fig=None, PlotSelect=None, Vz=None):
         fig4()
 
 
+    return TOT_G
 
 

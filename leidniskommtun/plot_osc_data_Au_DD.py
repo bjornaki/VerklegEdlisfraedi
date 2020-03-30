@@ -161,7 +161,6 @@ def Au(fig=None, PlotSelect=None, Vz=None):
         binrange = np.array([-1, 12])
         BW = 0.1
         bins = int((binrange[1]-binrange[0])/BW)
-        
 
         plt.hist(TOT_G/G0, bins=bins, range=binrange)
         plt.xlabel('Conductance [2e^2/h]')
@@ -181,6 +180,6 @@ def Au(fig=None, PlotSelect=None, Vz=None):
     elif fig == 4:
         fig4()
 
-
+    return TOT_G
 
 
