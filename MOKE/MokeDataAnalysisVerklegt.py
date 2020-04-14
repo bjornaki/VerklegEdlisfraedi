@@ -77,7 +77,7 @@ def PlotLoop(Data,UseCorrectedVoltage):
     ax.set_ylabel("Voltage [V]")
     ax.grid(alpha=0.3)
     #show the image
-    plt.close('all')
+    plt.close(fig)
 
 
 #Function that linearly fits the saturation moment and normalizes the hysterisis loop
@@ -131,17 +131,18 @@ def MaxSatLinearFit(Data,FieldMin,FieldMax,UseCorrectedVoltage=False,plotting=Fa
         if plotting:
             fig1,ax1 = plt.subplots()
             ax1.plot(MagField[:,i],yNew)
+            plt.close(fig1)
         DataNormalized[:,i] = yNew
 
     Data['VoltageNormalized'] = DataNormalized
     Data['VoltageAverage'] = np.average(DataNormalized,axis=1)
 
-    plt.close()
+    
 
     if plotting:
         fig2,ax2 = plt.subplots()
         ax2.plot(MagField[:,0],Data['VoltageNormalized'])
-        plt.close('all')
+        plt.close(fig2)
 
     return Data
 
@@ -207,6 +208,7 @@ def MokeCoercivity(Data,subfolder,plotting=True):
         deg = str(Data['Degrees'])
         stringName = subfolder + "\\" + name + " " + deg + " degrees.png"
         plt.savefig(stringName,dpi=300,format="png")
+        plt.close(fig)
     
 
     return leftSwitch, rightSwitch, Coercivity
