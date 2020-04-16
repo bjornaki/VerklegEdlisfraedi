@@ -18,5 +18,6 @@ ax3 = plt.subplot(133, projection='polar')
 fig, ax1 = CAZ.CoAlZr(fig,ax1,MagRemBool=True)
 fig, ax2 = PY300.PY300C(fig,ax2,MagRemBool=True)
 fig, ax3 = PY400.PY400C(fig,ax3,MagRemBool=True)
+fig.tight_layout()#lagar spacing milli subplot
 plt.savefig("MagRemAllThree.png",format="png",dpi=300,bbox_inches="tight")
 plt.show()
